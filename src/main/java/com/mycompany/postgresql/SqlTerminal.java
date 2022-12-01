@@ -14,7 +14,7 @@ public class SqlTerminal implements SqlInterface
     @Override
     public Connection connect(String url, String username, String password) throws SQLException, Exception
     {
-        conn = DriverManager.getConnection(url, username, password);    
+        conn = DriverManager.getConnection(url, username, password);
         return conn;
     }
                 
@@ -30,10 +30,18 @@ public class SqlTerminal implements SqlInterface
         sqlBuff += param[paramAmount] + ");";
         
         Statement statement = conn.createStatement();
-        statement.execute(sqlBuff);
-        statement.close();
         
-        return true;
+        
+        
+        
+        
+        return statement.execute(sqlBuff);
+        
+        
+        
+        
+       
+      
     }
 
     @Override
@@ -53,7 +61,7 @@ public class SqlTerminal implements SqlInterface
 
     @Override
     public void close() throws Exception {
-        
+         statement.close();
     }
     
 }
