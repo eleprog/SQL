@@ -7,9 +7,9 @@ import java.sql.Statement;
 
 public class SqlTerminal implements SqlInterface
 {
-    static private Connection conn;
-    static private String tableName;
-    static private int paramAmount = 0;
+    private Connection conn;
+    private String tableName;
+    private int paramAmount = 0;
     
     @Override
     public Connection connect(String url, String username, String password) throws SQLException, Exception
@@ -17,14 +17,13 @@ public class SqlTerminal implements SqlInterface
         conn = DriverManager.getConnection(url, username, password);    
         return conn;
     }
-            
-           
+                
     @Override
     public boolean createTable(String name, String[] param) throws SQLException, Exception
     {
         paramAmount = param.length;
         tableName = name;
-        String sqlBuff = "CREATE TABLE IF NOT EXISTS (";
+        String sqlBuff = "CREATE TABLE IF NOT EXISTS" ;
         
         for(int i = 0; i < paramAmount - 1; i++)
             sqlBuff += param[i] + ',';
