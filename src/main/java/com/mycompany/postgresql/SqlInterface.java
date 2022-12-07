@@ -9,10 +9,13 @@ public interface SqlInterface extends AutoCloseable
     
     boolean createTable(String name, String[] param) throws SQLException, Exception;
     
-    boolean insert(String[] values);
+    boolean deleteTable() throws SQLException, Exception;
     
-    int insert(String[][] values);
+    boolean insert(String columns, String[] values) throws SQLException, Exception;
+    
+    int insert(String columns, String[][] values) throws SQLException, Exception;
+    
+    int update();
     
     String[] select(String values);
-    
 }
