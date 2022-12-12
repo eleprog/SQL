@@ -1,21 +1,49 @@
 package com.mycompany.postgresql;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 
 public interface SqlInterface extends AutoCloseable
 {
-    boolean connect(String url, String username, String password) throws SQLException, Exception;
+    boolean connect(String url, String username, String password);
     
-    boolean createTable(String name, String[] param) throws SQLException, Exception;
+    boolean create(String tableName, String[] columns);
     
-    boolean deleteTable() throws SQLException, Exception;
+    int insert(String tableName, String columns, String[] values);
     
-    boolean insert(String columns, String[] values) throws SQLException, Exception;
+    int updateRows(String tableName, String column, String conditionColumn, String[] conditions, String[] values);
     
-    int insert(String columns, String[][] values) throws SQLException, Exception;
+    boolean updateColumns(String tableName, String[] columns, String[] values, String condition);
     
-    int update();
+    String[][] select(String[] columns);
     
-    String[] select(String values);
+    boolean delete(String tableName);
+    
+    int deleteRows(String tableName, String condition);
+    
+    boolean addColumn(String tableName, String column); //column = "name TEXT NOT NULL"
+    
+    //close();
 }
+
+
+
+/*public interface SqlInterface extends AutoCloseable 
+{
+    Connection connect(String url, String username, String password);
+    //"jdbc:postgresql://localhost:5432/postgres" <- url
+    boolean create(String tableName, String[] columns);
+    int insert(String tableName, String columns, String[] values);
+    int updateRows(String tableName, String column, String conditionColumn, String[] conditions, String[] values);
+    //UPDATE studnts SET name = CASE id
+    //                          WHEN 23 THEN 'Alexndr'
+    //                          WHEN 24 THEN 'Sasha'
+    //                          WHEN 25 THEN 'ALEX'
+    //                          ELSE name END
+    //WHERE id IN(23, 24, 25);
+    boolean updateColumns(String tableName, String[] columns, String[] values, String condition);
+    //UPDATE students SET name = 'Alexandr', date = 12 WHERE school_id = 23 AND last_name LIKE 'smth';
+    String[][] select(String[] columns);
+    boolean delete(String tableName);
+    int deleteRows(String tableName, String condition);
+    boolean addColumn(String tableName, String column); //column = "name TEXT NOT NULL"
+    //close()
+}*/
