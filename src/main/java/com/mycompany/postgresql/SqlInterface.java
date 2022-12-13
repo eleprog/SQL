@@ -1,13 +1,15 @@
 package com.mycompany.postgresql;
 
+import java.sql.SQLException;
+
 
 public interface SqlInterface extends AutoCloseable
 {
-    boolean connect(String url, String username, String password);
+    boolean connect(String url, String username, String password) throws SQLException, Exception;
     
-    boolean create(String tableName, String[] columns);
+    boolean create(String tableName, String[] columns) throws SQLException, Exception;
     
-    int insert(String tableName, String columns, String[] values);
+    int insert(String tableName, String columns, String[] values) throws SQLException, Exception;
     
     int updateRows(String tableName, String column, String conditionColumn, String[] conditions, String[] values);
     
