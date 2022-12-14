@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class SqlTerminal implements SqlInterface
 {
@@ -37,17 +38,20 @@ public class SqlTerminal implements SqlInterface
     }
 
     @Override
-    public boolean create(String tableName, String[][] columns) throws SQLException, Exception {
-        int maxIndexParam = columns.length - 1;
+    public boolean create(String tableName, ArrayList<String[]> columns) throws SQLException, Exception {
+        int maxIndexParam = columns.size() - 1;
         String Buff = "CREATE TABLE IF NOT EXISTS " + tableName + " (";
         
         for(int i = 0; i < maxIndexParam; i++){
-            Buff += columns[i][0] + " ";
-            Buff += columns[i][1] + " ";
-            Buff += columns[i][2] + ", ";
+            String[] tmp = columns.get(i);
+            for(String word: tmp)              
+                Buff += word + " ";
+            Buff +=", ";
         }
-        
-        Buff += columns[maxIndexParam] + ");";
+        String[] tmp = columns.get(maxIndexParam);
+        for(String word: tmp)              
+                Buff += word + " ";
+            Buff +=");";
         
         if(printConsoleFlag) System.out.println(Buff);
         
