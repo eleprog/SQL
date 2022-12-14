@@ -1,5 +1,7 @@
 package com.mycompany.postgresql;
 
+import com.opencsv.CSVReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -11,12 +13,10 @@ public class PostgreSQL
     {   
         // Java code to illustrate reading a
 // CSV file line by line
-public static void readDataLineByLine(String file)
-{
 
 	try {
 
-		File file = new File file();
+		File file = new File("opisanie_poley.csv");
 		FileReader filereader = new FileReader(file);
 
 		// create csvReader object passing
@@ -35,7 +35,7 @@ public static void readDataLineByLine(String file)
 	catch (Exception e) {
 		e.printStackTrace();
 	}
-}
+
 
         
         
