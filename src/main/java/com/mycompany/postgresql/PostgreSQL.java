@@ -19,7 +19,10 @@ public class PostgreSQL
             
             SqlTerminal dbTable = new SqlTerminal();
             dbTable.connect("jdbc:postgresql://127.0.0.1:5432/postgres", "postgres", "postgres");
-            System.out.println(dbTable.create(name, data));
+            dbTable.create(name, data);
+            
+            String[] insert = {"1","'hello'"};
+            dbTable.insert(name, insert);
             
             dbTable.close();
             //dbTable.create(name, data);

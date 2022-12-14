@@ -11,6 +11,8 @@ public interface SqlInterface extends AutoCloseable
     
     int insert(String tableName, String columns, String[] values) throws SQLException, Exception;
     
+    int insert(String tableName, String[] values) throws SQLException, Exception;
+    
     int updateRows(String tableName, String column, String conditionColumn, String[] conditions, String[] values);
     
     boolean updateColumns(String tableName, String[] columns, String[] values, String condition);

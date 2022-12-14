@@ -9,6 +9,7 @@ public class SqlTerminal implements SqlInterface
 {
     private Connection conn;
     private Statement statement;
+    private boolean printConsoleFlag = true;
     
     void SqlTerminal() {
         
@@ -25,12 +26,14 @@ public class SqlTerminal implements SqlInterface
     public boolean create(String tableName, String[] columns) throws SQLException, Exception {
         
         int maxIndexParam = columns.length - 1;
-        String Buff = "CREATE TABLE IF NOT EXISTS " + tableName + "(";
+        String Buff = "CREATE TABLE IF NOT EXISTS " + tableName + " (";
         
         for(int i = 0; i < maxIndexParam; i++)
-            Buff += columns[i] + ',';
+            Buff += columns[i] + ", ";
         Buff += columns[maxIndexParam] + ");";
-            
+        
+        if(printConsoleFlag) System.out.println(Buff);
+        
         return statement.execute(Buff);
     }
 
@@ -41,12 +44,27 @@ public class SqlTerminal implements SqlInterface
             Buff += values[i] + ',';
         Buff += values[values.length - 1] + ");";
         
-        System.out.println(Buff);
+        if(printConsoleFlag) System.out.println(Buff);
         
         statement.execute(Buff);
         return 0;
     }
 
+    @Override
+    public int insert(String tableName, String[] values) throws SQLException, Exception {
+        int maxIndexParam = values.length - 1;
+        String Buff = "INSERT INTO " + tableName + " VALUES (";
+        
+        for(int i = 0; i < maxIndexParam; i++)
+            Buff += values[i] + ',';
+        Buff += values[maxIndexParam] + ");";
+        
+        if(printConsoleFlag) System.out.println(Buff);
+        
+        statement.execute(Buff);
+        return 0;
+    }
+    
     @Override
     public int updateRows(String tableName, String column, String conditionColumn, String[] conditions, String[] values) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -82,6 +100,8 @@ public class SqlTerminal implements SqlInterface
         statement.close();
         conn.close();      
     }   
+
+    
 }
 
 /*static private Connection conn;
