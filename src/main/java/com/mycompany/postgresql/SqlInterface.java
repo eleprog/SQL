@@ -9,7 +9,7 @@ public interface SqlInterface extends AutoCloseable
     
     boolean create(String tableName, String[] columns) throws SQLException, Exception;
     
-    boolean create(String tableName, String[][][] columns) throws SQLException, Exception;
+    boolean create(String tableName, String[][] columns) throws SQLException, Exception;
     
     int insert(String tableName, String columns, String[] values) throws SQLException, Exception;
     
