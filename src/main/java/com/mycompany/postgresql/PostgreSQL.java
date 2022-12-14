@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class PostgreSQL
 {   
-    public static void main(String[] args) throws IOException 
+    public static void main(String[] args) throws IOException
     {    
         final String name = "shop";
         String[] data = {"id_shop INT", "name VARCHAR(20)"};
