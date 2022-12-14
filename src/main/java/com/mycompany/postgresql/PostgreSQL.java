@@ -10,17 +10,19 @@ public class PostgreSQL
 {   
     public static void main(String[] args) 
     {
-        Scanner myScnr = new Scanner(System.in);     
+        Scanner myScnr = new Scanner(System.in);
         try
         {
             final String name = "shop";
             String[] data = {"id_shop INT", "name VARCHAR(20)"};
+            //String[] data = {"id_shop", "name"};
             
             SqlTerminal dbTable = new SqlTerminal();
             dbTable.connect("jdbc:postgresql://127.0.0.1:5432/postgres", "postgres", "postgres");
-            System.out.println(dbTable.createTable(name, data));
+            System.out.println(dbTable.create(name, data));
             
-            dbTable.createTable(name, data);
+            dbTable.close();
+            //dbTable.create(name, data);
             
             //int a = myScnr.nextInt();
             

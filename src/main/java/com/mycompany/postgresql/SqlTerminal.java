@@ -24,13 +24,13 @@ public class SqlTerminal implements SqlInterface
     @Override
     public boolean create(String tableName, String[] columns) throws SQLException, Exception {
         
-        var paramAmount = columns.length;
-        var Buff = "CREATE TABLE IF NOT EXISTS " + tableName + "(";
+        int maxIndexParam = columns.length - 1;
+        String Buff = "CREATE TABLE IF NOT EXISTS " + tableName + "(";
         
-        for(int i = 0; i < paramAmount - 1; i++)
+        for(int i = 0; i < maxIndexParam; i++)
             Buff += columns[i] + ',';
-        Buff += columns[paramAmount - 1] + ");";
-        
+        Buff += columns[maxIndexParam] + ");";
+            
         return statement.execute(Buff);
     }
 
@@ -79,9 +79,9 @@ public class SqlTerminal implements SqlInterface
 
     @Override
     public void close() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
+        statement.close();
+        conn.close();      
+    }   
 }
 
 /*static private Connection conn;
