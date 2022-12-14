@@ -1,5 +1,6 @@
 package com.mycompany.postgresql;
 
+import java.io.FileReader;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -7,7 +8,37 @@ import java.sql.SQLException;
 public class PostgreSQL
 {   
     public static void main(String[] args) throws IOException
-    {    
+    {   
+        // Java code to illustrate reading a
+// CSV file line by line
+public static void readDataLineByLine(String file)
+{
+
+	try {
+
+		File file = new File file();
+		FileReader filereader = new FileReader(file);
+
+		// create csvReader object passing
+		// file reader as a parameter
+		CSVReader csvReader = new CSVReader(filereader);
+		String[] nextRecord;
+
+		// we are going to read data line by line
+		while ((nextRecord = csvReader.readNext()) != null) {
+			for (String cell : nextRecord) {
+				System.out.print(cell + "\t");
+			}
+			System.out.println();
+		}
+	}
+	catch (Exception e) {
+		e.printStackTrace();
+	}
+}
+
+        
+        
         final String name = "shop";
         String[] data = {"id_shop INT", "name VARCHAR(20)"};
         
