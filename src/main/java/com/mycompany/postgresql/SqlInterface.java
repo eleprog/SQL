@@ -1,6 +1,7 @@
 package com.mycompany.postgresql;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 
 public interface SqlInterface extends AutoCloseable
@@ -9,7 +10,7 @@ public interface SqlInterface extends AutoCloseable
     
     boolean create(String tableName, String[] columns) throws SQLException, Exception;
     
-    boolean create(String tableName, String[][] columns) throws SQLException, Exception;
+    boolean create(String tableName, ArrayList<String[]> columns) throws SQLException, Exception;
     
     int insert(String tableName, String columns, String[] values) throws SQLException, Exception;
     

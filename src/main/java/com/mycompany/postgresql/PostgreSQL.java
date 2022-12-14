@@ -1,53 +1,44 @@
 package com.mycompany.postgresql;
 
 import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvValidationException;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 
 public class PostgreSQL
 {   
     public static void main(String[] args) throws IOException
     {   
-        // Java code to illustrate reading a
-// CSV file line by line
+        ArrayList dataCSV = new ArrayList<String[]>();
+        String[] nextRecord;
 
 	try {
+            File file = new File("opisanie_poley.csv");
+            FileReader filereader = new FileReader(file);
+            CSVReader csvReader = new CSVReader(filereader);
 
-		File file = new File("opisanie_poley.csv");
-		FileReader filereader = new FileReader(file);
-
-		// create csvReader object passing
-		// file reader as a parameter
-		CSVReader csvReader = new CSVReader(filereader);
-		String[] nextRecord;
-
-		// we are going to read data line by line
-		while ((nextRecord = csvReader.readNext()) != null) {
-			for (String cell : nextRecord) {
-				System.out.print(cell + "\t");
-			}
-			System.out.println();
-		}
+            for(int i = 0; (nextRecord = csvReader.readNext()) != null; i++)
+                dataCSV.add(nextRecord);
+            
 	}
-	catch (Exception e) {
+	catch (CsvValidationException | IOException e) {
 		e.printStackTrace();
 	}
-
-
         
         
-        final String name = "shop";
-        String[] data = {"id_shop INT", "name VARCHAR(20)"};
+     
+        final String name = "shop"; 
+        SqlTerminal dbTable = new SqlTerminal();
         
-        try (SqlTerminal dbTable = new SqlTerminal()) {
+        try {   
             dbTable.connect("jdbc:postgresql://127.0.0.1:5432/postgres", "postgres", "postgres");
-            dbTable.create(name, data);
-
-            String[] insert = {"1","'hello'"};
-            dbTable.insert(name, insert);
+            dbTable.create(name, dataCSV);
+            
+            dbTable.close();
         }
            
         catch (SQLException e) {
